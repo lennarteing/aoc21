@@ -2,10 +2,10 @@ from collections import deque
 
 
 def solve_part_one(content):
-    return sum(map(lambda win: 1 if win[1] > win[0] else 0, window(content, 2)))
+    return sum(map(lambda win: 1 if win[1] > win[0] else 0, window(content, n=2)))
 
 def solve_part_two(content):
-    ret = map(sum, window(content))
+    ret = map(sum, window(content, n=3))
     return solve_part_one(list(ret))
 
 
