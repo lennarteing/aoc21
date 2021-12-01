@@ -2,12 +2,7 @@ from collections import deque
 
 
 def solve_part_one(content):
-    return sum(
-        map(lambda measurement: 0 if measurement[0] == 0 else
-        1 if content[measurement[0]] > content[measurement[0] - 1] else 0,
-            enumerate(content))
-    )
-
+    return sum(map(lambda win: 1 if win[1] > win[0] else 0, window(content, 2)))
 
 def solve_part_two(content):
     ret = map(sum, window(content))
