@@ -12,4 +12,4 @@ if __name__ == '__main__':
     part_two_solution = solve_part_two(content)
 
     print("The solution to part one is: " + str(part_one_solution))
-    print("The solution to part two is: " + part_two_solution)
+    print("The solution to part two is: " + str(part_two_solution))
