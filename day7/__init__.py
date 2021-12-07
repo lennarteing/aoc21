@@ -27,7 +27,6 @@ def growing_distance(point, *args):
 
 def single_growing_distance(x, y):
     distance = sum([_ for _ in range(int(np.round(abs(y - x) + 1)))])
-    print(f"{x} to {y}: {distance}")
     return distance
 
 
