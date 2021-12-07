@@ -9,6 +9,7 @@ def solve_part_one(lines):
             if board.is_won():
                 return board.score(num)
 
+
 def solve_part_two(lines):
     numbers, boards = format_input(lines)
     last_won_board_score = 0
