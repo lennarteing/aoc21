@@ -1,9 +1,6 @@
-from functools import reduce
-
-
 def solve_part_one(content):
     numbers = map(str_to_bin_int, content)
-    gamma = most_commmon_bit_number(numbers)
+    gamma = most_common_bit_number(numbers)
     epsilon = least_common_bit_number(numbers)
     print(gamma)
     print(epsilon)
@@ -14,14 +11,14 @@ def solve_part_two(content):
     pass
 
 
-def most_commmon_bit_number(numbers):
+def most_common_bit_number(numbers):
     backup = list(numbers)
     most_common_bits = [most_common_bit_at(backup, idx) for idx in range(12)]
     return str_to_bin_int(''.join([str(bit) for bit in most_common_bits]))
 
 
 def least_common_bit_number(numbers):
-    return bit_not(most_commmon_bit_number(numbers))
+    return bit_not(most_common_bit_number(numbers))
 
 
 def most_common_bit_at(numbers, pos):

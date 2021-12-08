@@ -1,9 +1,9 @@
-from day4 import solve_part_one, solve_part_two
+from day8 import solve_part_one, solve_part_two
 
 if __name__ == '__main__':
 
     # Read file from input and transform into array of integers.
-    filename = "../resources/day4input"
+    filename = "../resources/day8testinput"
     with open(filename) as f:
         content = f.readlines()
     content = [line.strip() for line in content]

@@ -18,7 +18,6 @@ def solve_part_one(lines):
     return len(overlaps)
 
 
-
 def solve_part_two(lines):
     lines = [format_line(line) for line in lines]
     line_map = np.zeros(shape=find_map_dimensions(lines))

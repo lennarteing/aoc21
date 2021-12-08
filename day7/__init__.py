@@ -5,16 +5,16 @@ import numpy as np
 
 def solve_part_one(lines):
     numbers = list(map(lambda x: int(x), lines[0].split(',')))
-    x0 = (average(numbers),)
+    x0 = np.array([average(numbers), ])
     minimum = minimize(fun=total_distance, x0=x0, args=(numbers,), method='Nelder-Mead')
-    return round(minimum.fun);
+    return round(minimum.fun)
 
 
 def solve_part_two(lines):
     numbers = list(map(lambda x: int(x), lines[0].split(',')))
-    x0 = (average(numbers),)
+    x0 = np.array([average(numbers), ])
     minimum = minimize(fun=growing_distance, x0=x0, args=(numbers,), method='Nelder-Mead')
-    return round(minimum.fun);
+    return round(minimum.fun)
 
 
 def total_distance(point, *args):
