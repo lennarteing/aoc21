@@ -71,6 +71,7 @@ def calculate_completion_string(memory):
         ret += [closers[memory.pop()]]
     return ''.join(ret)
 
+
 def calculate_completion_string_score(completion_string):
     score = 0
     for character in completion_string:
