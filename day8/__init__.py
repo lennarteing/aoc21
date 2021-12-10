@@ -1,5 +1,6 @@
 import re
 import numpy as np
+import setuptools.wheel
 
 
 def solve_part_one(lines):
@@ -19,8 +20,32 @@ def solve_part_two(lines):
 
 
 def solve_line(inputs, outputs):
-    #Started golfing here. Look into golfed.
-    pass
+    possibilities = {
+        'a': {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
+        'b': {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
+        'c': {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
+        'd': {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
+        'e': {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
+        'f': {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
+        'g': {'a', 'b', 'c', 'd', 'e', 'f', 'g'}
+    }
+    for item in inputs:
+        s = set([char for char in item])
+        if len(s) == 2:
+            possibilities['c'] = s
+            possibilities['f'] = s
+        elif len(s) == 4:
+            possibilities['b'] = s
+            possibilities['c'] = s
+            possibilities['d'] = s
+            possibilities['f'] = s
+        elif len(s) == 3:
+            possibilities['a'] = s
+            possibilities['c'] = s
+            possibilities['f'] = s
+    print(possibilities)
+    possibilities['a'] = set.union(possibilities['c'], possibilities['f']) - possibilities['a']
+
 
 
 def format_input(lines):
