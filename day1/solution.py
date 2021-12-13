@@ -1,12 +1,9 @@
+import defaults
 from day1 import solve_part_two, solve_part_one
 
 if __name__ == '__main__':
 
-    # Read file from input and transform into array of integers.
-    filename = "../resources/day1input"
-    with open(filename) as f:
-        content = f.readlines()
-    content = [int(line.strip()) for line in content]
+    content = defaults.puzzle_input_now(2021, 1)
 
     part_one_solution = solve_part_one(content)
     part_two_solution = solve_part_two(content)
