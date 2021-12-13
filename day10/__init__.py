@@ -61,8 +61,8 @@ def is_corrupted_line(line):
     memory = deque()
     last_symbol = None
     for instruction in line:
-        is_correct_character, memory = instruction.execute(memory=memory)
-        last_symbol = instruction.symbol
+        is_correct_character, memory = instruction.execute(memory)
+        last_symbol = instruction.instruction_parameters['symbol']
         if not is_correct_character:
             return True, last_symbol, memory
     return False, last_symbol, memory
@@ -83,43 +83,30 @@ def calculate_completion_string_score(completion_string):
     return score
 
 
-class Instruction(ABC):
+class PushInstruction(defaults.Instruction):
 
-    def __init__(self, symbol):
-        self.symbol = symbol
-
-    @abstractmethod
-    def execute(self, memory, *kwargs):
-        pass
-
-
-class PushInstruction(Instruction):
-
-    def __init__(self, symbol):
-        super().__init__(symbol)
-
-    def execute(self, memory, *kwargs):
-        cpy = memory.copy()
-        cpy.append(self.symbol)
+    def execute(self, system_state):
+        cpy = system_state.copy()
+        cpy.append(self.instruction_parameters['symbol'])
         return True, cpy
 
 
-class PopInstruction(Instruction):
+class PopInstruction(defaults.Instruction):
 
-    def __init__(self, symbol):
-        super().__init__(openers[symbol])
+    def __init__(self, instruction_parameters):
+        super().__init__({'symbol': openers[instruction_parameters['symbol']]})
 
-    def execute(self, memory, *kwargs):
-        cpy = memory.copy()
+    def execute(self, system_state):
+        cpy = system_state.copy()
         symbol = cpy.pop()
-        return symbol == self.symbol, cpy
+        return symbol == self.instruction_parameters['symbol'], cpy
 
 
 def make_instruction(character):
     if character in openers.values():
-        return PushInstruction(character)
+        return PushInstruction({'symbol': character})
     elif character in closers.values():
-        return PopInstruction(character)
+        return PopInstruction({'symbol': character})
     else:
         raise ValueError(f"There is no instruction corresponding to character: '{character}'")
 
