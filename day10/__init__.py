@@ -2,6 +2,8 @@ import statistics
 from abc import ABC, abstractmethod
 from collections import deque
 
+import defaults
+
 points = {
     ')': 3,
     ']': 57,
@@ -49,7 +51,8 @@ def solve_part_two(lines):
     incomplete_lines = [line for line in instruction_lines if not is_corrupted_line(line)[0]]
     memories = [is_corrupted_line(line)[2] for line in incomplete_lines]
     completion_strings = [calculate_completion_string(memory) for memory in memories]
-    completion_string_scores = [calculate_completion_string_score(completion_string) for completion_string in completion_strings]
+    completion_string_scores = [calculate_completion_string_score(completion_string) for completion_string in
+                                completion_strings]
     sorted_completion_string_scores = sorted(completion_string_scores)
     return statistics.median(sorted_completion_string_scores)
 
@@ -121,4 +124,11 @@ def make_instruction(character):
         raise ValueError(f"There is no instruction corresponding to character: '{character}'")
 
 
+if __name__ == '__main__':
+    content = defaults.puzzle_input_now(2021, 10)
 
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))

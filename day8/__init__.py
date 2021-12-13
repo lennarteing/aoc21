@@ -1,6 +1,7 @@
 import re
 import numpy as np
-import setuptools.wheel
+
+import defaults
 
 
 def solve_part_one(lines):
@@ -43,9 +44,7 @@ def solve_line(inputs, outputs):
             possibilities['a'] = s
             possibilities['c'] = s
             possibilities['f'] = s
-    print(possibilities)
     possibilities['a'] = set.union(possibilities['c'], possibilities['f']) - possibilities['a']
-
 
 
 def format_input(lines):
@@ -55,3 +54,13 @@ def format_input(lines):
     outputs = rot_codes_view[0]
     inputs = rot_codes_view[1]
     return codes, outputs, inputs
+
+
+if __name__ == '__main__':
+    content = defaults.puzzle_input_now(2021, 8)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))

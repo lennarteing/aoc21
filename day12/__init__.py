@@ -1,11 +1,12 @@
 import re
 
+import defaults
+
 
 def solve_part_one(lines):
-
     def path_search(connection_matrix, visited_nodes=set(), start='start', end='end'):
         if start == end:
-            return {(start, )}
+            return {(start,)}
 
         visitable_nodes = set.difference(
             connection_matrix[start],
@@ -19,7 +20,7 @@ def solve_part_one(lines):
                                         visited_nodes=tmp_visited_nodes,
                                         start=node,
                                         end=end):
-                sub_paths.add((start, ) + sub_path)
+                sub_paths.add((start,) + sub_path)
         return sub_paths
 
     connections = format_input(lines)
@@ -28,7 +29,6 @@ def solve_part_one(lines):
 
 
 def solve_part_two(lines):
-
     def path_search(connections, visited_nodes=set(), start='start', end='end', small_cave_taken=''):
 
         if start == end:
@@ -73,3 +73,14 @@ def format_input(lines):
         elif match.group('a') != 'start':
             ret[match.group('b')] = set.union(ret[match.group('b')], {match.group('a')})
     return ret
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 12)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))

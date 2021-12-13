@@ -7,6 +7,7 @@ import numpy as np
 from scipy.ndimage import generic_filter
 from functools import reduce
 
+import defaults
 
 adjacency_footprint = np.array([[False, True, False],
                                 [True, True, True],
@@ -61,3 +62,15 @@ def format_input(lines):
 def draw_image(image):
     skimage.io.imshow(image)
     matplotlib.pyplot.show()
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 9)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))
+

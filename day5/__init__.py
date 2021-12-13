@@ -2,6 +2,8 @@ import matplotlib
 import skimage
 import numpy as np
 
+import defaults
+
 
 def solve_part_one(lines):
     # Format line as beginning x, beginning y -> end x, end y
@@ -49,3 +51,14 @@ def find_map_dimensions(points):
 def draw_map(line_map):
     skimage.io.imshow(line_map)
     matplotlib.pyplot.show()
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 5)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))

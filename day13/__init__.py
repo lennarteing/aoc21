@@ -3,6 +3,8 @@ from abc import abstractmethod, ABC
 
 import numpy as np
 
+import defaults
+
 
 def solve_part_one(lines):
     points, fold_instructions = format_input(lines)
@@ -75,3 +77,14 @@ class VerticalFoldInstruction(FoldInstruction):
         points_left = {point for point in points if point not in points_right}
         mirrored_points_right = {(self.value - (point[0] - self.value), point[1]) for point in points_right}
         return set.union(points_left, mirrored_points_right)
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 13)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))

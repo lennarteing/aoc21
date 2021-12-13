@@ -1,9 +1,10 @@
+import defaults
+
+
 def solve_part_one(content):
     numbers = map(str_to_bin_int, content)
     gamma = most_common_bit_number(numbers)
     epsilon = least_common_bit_number(numbers)
-    print(gamma)
-    print(epsilon)
     return gamma * epsilon
 
 
@@ -41,3 +42,14 @@ def bit_at(num, pos):
 
 def str_to_bin_int(string):
     return int(string, 2)
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 3)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))

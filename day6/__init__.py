@@ -1,3 +1,6 @@
+import defaults
+
+
 def solve_part_one(lines):
     # Every laternfish can be represented as the number of days it will
     # take for it to produce a new laternfish
@@ -36,3 +39,14 @@ def step_part_one(lanternfish_dict):
     lanternfish_dict[8] = lanternfish_dict[-1]
     del lanternfish_dict[-1]
     return lanternfish_dict
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 6)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))

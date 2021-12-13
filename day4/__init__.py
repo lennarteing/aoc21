@@ -1,5 +1,7 @@
 import numpy as np
 
+import defaults
+
 
 def solve_part_one(lines):
     numbers, boards = format_input(lines)
@@ -27,7 +29,7 @@ def format_input(lines, subdivisions=5):
     numbers = np.array([int(x) for x in lines[0].split(',')])
     boards = [line for line in lines[1:] if line != '']
     boards = np.array([str.split(line) for line in boards])
-    boards = boards.astype(np.int)
+    boards = boards.astype(int)
     boards = np.array([Board(boards[x:x + subdivisions]) for x in range(0, len(boards), subdivisions)])
     return numbers, boards
 
@@ -58,4 +60,15 @@ class Board:
 
     def __str__(self):
         return str(self.board_cell_values)
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 4)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))
 

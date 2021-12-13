@@ -1,5 +1,7 @@
 from collections import deque
 
+import defaults
+
 
 def solve_part_one(content):
     return sum(map(lambda win: 1 if win[1] > win[0] else 0, window(content, n=2)))
@@ -18,3 +20,15 @@ def window(seq, n=3):
     for e in it:
         append(e)
         yield win
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 1)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))
+

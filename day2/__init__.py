@@ -3,6 +3,8 @@ import numpy as np
 from enum import Enum
 from abc import ABC, abstractmethod
 
+import defaults
+
 
 def solve_part_one(content):
     instruction_set = list(map(convert_line, content))
@@ -80,3 +82,14 @@ class UpInstruction(Instruction, ABC):
         hor, vert, aim = memory
         aim -= self.value
         return hor, vert, aim
+
+
+if __name__ == '__main__':
+
+    content = defaults.puzzle_input_now(2021, 2)
+
+    part_one_solution = solve_part_one(content)
+    part_two_solution = solve_part_two(content)
+
+    print("The solution to part one is: " + str(part_one_solution))
+    print("The solution to part two is: " + str(part_two_solution))
