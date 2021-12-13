@@ -1,5 +1,4 @@
 import re
-import struct
 
 
 def solve_part_one(lines):
