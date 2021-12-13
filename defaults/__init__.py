@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+from typing import TypeVar, Dict, Any
+
 import requests
 import os
 
@@ -50,5 +53,14 @@ def puzzle_input_now(year, day):
     return [line.strip() for line in puzzle_input]
 
 
-if __name__ == "__main__":
-    print(puzzle_input_now(2021, 13))
+T = TypeVar("T")
+
+
+class Instruction(ABC):
+
+    def __init__(self, instruction_parameters: Dict[str, Any] = dict()):
+        self.instruction_parameters = instruction_parameters
+
+    @abstractmethod
+    def execute(self, system_state: T, additional_parameters: Dict[str, Any] = dict()) -> T:
+        pass

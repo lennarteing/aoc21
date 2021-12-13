@@ -17,7 +17,7 @@ def solve_part_two(content):
     instruction_set = list(map(convert_to_instruction, content))
     memory = (0, 0, 0)
     for instruction in instruction_set:
-        memory = instruction.eval(memory)
+        memory = instruction.execute(memory)
     return memory[0] * memory[1]
 
 
@@ -35,11 +35,11 @@ def convert_line(line):
 def convert_to_instruction(line):
     instruction, value = line.split()
     if instruction == 'forward':
-        instruction = ForwardInstruction(int(value))
+        instruction = ForwardInstruction({'value': int(value)})
     elif instruction == 'down':
-        instruction = DownInstruction(int(value))
+        instruction = DownInstruction({'value': int(value)})
     elif instruction == 'up':
-        instruction = UpInstruction(int(value))
+        instruction = UpInstruction({'value': int(value)})
     return instruction
 
 
@@ -49,38 +49,28 @@ class InstructionCode(Enum):
     DOWN = (0, 1)
 
 
-class Instruction(ABC):
+class ForwardInstruction(defaults.Instruction, ABC):
 
-    def __init__(self, value):
-        self.value = value
-
-    @abstractmethod
-    def eval(self, memory):
-        pass
-
-
-class ForwardInstruction(Instruction, ABC):
-
-    def eval(self, memory):
-        hor, vert, aim = memory
-        hor += self.value
-        vert += self.value * aim
+    def execute(self, system_state):
+        hor, vert, aim = system_state
+        hor += self.instruction_parameters['value']
+        vert += self.instruction_parameters['value'] * aim
         return hor, vert, aim
 
 
-class DownInstruction(Instruction, ABC):
+class DownInstruction(defaults.Instruction, ABC):
 
-    def eval(self, memory):
-        hor, vert, aim = memory
-        aim += self.value
+    def execute(self, system_state):
+        hor, vert, aim = system_state
+        aim += self.instruction_parameters['value']
         return hor, vert, aim
 
 
-class UpInstruction(Instruction, ABC):
+class UpInstruction(defaults.Instruction, ABC):
 
-    def eval(self, memory):
-        hor, vert, aim = memory
-        aim -= self.value
+    def execute(self, system_state):
+        hor, vert, aim = system_state
+        aim -= self.instruction_parameters['value']
         return hor, vert, aim
 
 
