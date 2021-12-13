@@ -2,7 +2,6 @@ import re
 from abc import abstractmethod, ABC
 
 import numpy as np
-import setuptools.wheel
 
 
 def solve_part_one(lines):
