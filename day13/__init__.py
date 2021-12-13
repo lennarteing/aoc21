@@ -20,8 +20,7 @@ def solve_part_two(lines):
     paper = np.zeros(shape=(max_x + 1, max_y + 1))
     for point in points:
         paper[point] = 1
-    print(paper)
-    return
+    return "\n" + str(paper)
 
 
 def format_input(lines):
