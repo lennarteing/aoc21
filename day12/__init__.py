@@ -29,13 +29,13 @@ def solve_part_one(lines):
 
 
 def solve_part_two(lines):
-    def path_search(connections, visited_nodes=set(), start='start', end='end', small_cave_taken=''):
+    def path_search(conn, visited_nodes=set(), start='start', end='end', small_cave_taken=''):
 
         if start == end:
             return {(start,)}
 
         visitable_nodes = set.difference(
-            connections[start],
+            conn[start],
             {node for node in visited_nodes if str.islower(node) and small_cave_taken}
         )
 
@@ -46,7 +46,7 @@ def solve_part_two(lines):
                 node if str.islower(node) and node in tmp_visited_nodes else
                 ''
             )
-            for sub_path in path_search(connections=connections,
+            for sub_path in path_search(conn=conn,
                                         visited_nodes=tmp_visited_nodes,
                                         start=node,
                                         end=end,

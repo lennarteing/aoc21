@@ -9,8 +9,8 @@ def _get_puzzle_input(year, day):
     if not _session_cookie_exists():
         raise Exception("There is no session cookie provided.")
 
-    with open("../resources/session-cookie") as sessioncookie:
-        session_id = sessioncookie.readline()
+    with open("../resources/session-cookie") as session_cookie:
+        session_id = session_cookie.readline()
     url = f"https://adventofcode.com/{year}/day/{day}/input"
     headers = {'session': session_id}
 
