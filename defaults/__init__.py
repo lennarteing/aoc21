@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from collections import deque
+from itertools import islice
 from typing import TypeVar, Dict, Any
 
 import requests
@@ -42,8 +43,14 @@ def _create_puzzle_input(day, puzzle_input):
             file.close()
 
 
-def puzzle_input_now(year, day):
-    if _puzzle_input_exists(day):
+def puzzle_input_now(year, day, test=False, test_num=None):
+    if test:
+        tn = ""
+        if test_num is not None:
+            tn += str(test_num)
+        with open(f"../resources/day{day}testinput{tn}") as file:
+            puzzle_input = file.readlines()
+    elif _puzzle_input_exists(day):
         print("puzzle_input was direct")
         with open(f"../resources/day{day}input") as file:
             puzzle_input = file.readlines()
@@ -56,12 +63,13 @@ def puzzle_input_now(year, day):
 
 def sliding_window(seq, n=3):
     it = iter(seq)
-    win = deque((next(it, None) for _ in range(n)), maxlen=n)
-    yield win
-    append = win.append
-    for e in it:
-        append(e)
-        yield win
+    result = tuple(islice(it, n))
+    if len(result) == n:
+        yield result
+    for elem in it:
+        result = result[1:] + (elem,)
+        yield result
+
 
 T = TypeVar("T")
 
