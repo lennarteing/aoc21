@@ -78,7 +78,6 @@ def least_common(polymer):
 
 
 def format_input(lines):
-    polymer_template, rules = None, None
     split_idx = lines.index('')
     polymer_template_line, rule_lines = [lines[: split_idx], lines[split_idx + 1:]]
     polymer_template = polymer_template_line[0]
