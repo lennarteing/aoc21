@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from collections import deque
 from typing import TypeVar, Dict, Any
 
 import requests
@@ -52,6 +53,15 @@ def puzzle_input_now(year, day):
         _create_puzzle_input(day, puzzle_input)
     return [line.strip() for line in puzzle_input]
 
+
+def sliding_window(seq, n=3):
+    it = iter(seq)
+    win = deque((next(it, None) for _ in range(n)), maxlen=n)
+    yield win
+    append = win.append
+    for e in it:
+        append(e)
+        yield win
 
 T = TypeVar("T")
 
